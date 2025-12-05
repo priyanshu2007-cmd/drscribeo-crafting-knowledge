@@ -74,4 +74,5 @@ export const serviceCategories = [
   "Writing Services",
   "Content Creation",
   "Academic Materials",
+  "Statistical Analysis"
 ];

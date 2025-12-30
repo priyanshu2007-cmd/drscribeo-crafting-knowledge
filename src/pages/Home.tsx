@@ -1,10 +1,12 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, CheckCircle2, Clock, Shield, Users } from "lucide-react";
+import { ArrowRight, CheckCircle2, Clock, Shield, Users, Calendar } from "lucide-react";
 import ServiceCard from "@/components/ServiceCard";
+import GuidanceProcess from "@/components/GuidanceProcess";
 import { services } from "@/data/services";
 
 const Home = () => {
+  const navigate = useNavigate();
   const featuredServices = services.slice(0, 6);
 
   const features = [
@@ -13,6 +15,10 @@ const Home = () => {
     { icon: Users, title: "Expert Team", description: "Doctors & research analysts" },
     { icon: Clock, title: "On-Time Delivery", description: "Meeting your deadlines always" },
   ];
+
+  const handleConsultation = () => {
+    navigate("/contact?subject=Consultation%20Request");
+  };
 
   return (
     <div className="min-h-screen">
@@ -35,10 +41,14 @@ const Home = () => {
               Empowering medical, dental, and life-science professionals with expert writing services for thesis, publications, and clinical documentation.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button asChild size="lg" variant="secondary" className="text-lg px-8">
-                <Link to="/contact">
-                  Join Now <ArrowRight className="ml-2" size={20} />
-                </Link>
+              <Button 
+                onClick={handleConsultation}
+                size="lg" 
+                variant="secondary" 
+                className="text-lg px-8"
+              >
+                <Calendar className="mr-2" size={20} />
+                Schedule Your Consultation Now
               </Button>
               <Button asChild size="lg" variant="outline" className="text-lg px-8 bg-white/10 border-white text-white hover:bg-white hover:text-primary">
                 <Link to="/services">View All Services</Link>
@@ -66,8 +76,11 @@ const Home = () => {
         </div>
       </section>
 
+      {/* Guidance Process Section */}
+      <GuidanceProcess />
+
       {/* Services Section */}
-      <section className="py-16">
+      <section className="py-16 bg-muted/30">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-serif font-bold text-foreground mb-4">
@@ -100,8 +113,42 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Why Choose Us Section */}
+      {/* Pricing Preview Section */}
       <section className="py-16 bg-card">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto text-center">
+            <span className="inline-block mb-4 px-4 py-1.5 bg-secondary/10 text-secondary rounded-full text-sm font-medium">
+              Flexible Packages
+            </span>
+            <h2 className="text-3xl md:text-4xl font-serif font-bold text-foreground mb-4">
+              Plans That Fit Your Needs
+            </h2>
+            <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
+              From basic proofreading to comprehensive end-to-end support with defense preparation. 
+              Choose what works best for your academic journey.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Button asChild size="lg" className="gradient-primary hover:opacity-90">
+                <Link to="/pricing">
+                  View Pricing & Plans <ArrowRight className="ml-2" size={18} />
+                </Link>
+              </Button>
+              <Button 
+                onClick={handleConsultation}
+                size="lg" 
+                variant="outline" 
+                className="border-primary text-primary hover:bg-primary hover:text-primary-foreground"
+              >
+                <Calendar className="mr-2" size={18} />
+                Get Custom Quote
+              </Button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Why Choose Us Section */}
+      <section className="py-16 bg-muted/30">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
             <h2 className="text-3xl md:text-4xl font-serif font-bold text-center mb-12">
@@ -179,10 +226,14 @@ const Home = () => {
           <p className="text-xl mb-8 max-w-2xl mx-auto text-white/90">
             Join thousands of satisfied medical professionals who trust DrScribeO for their academic writing needs
           </p>
-          <Button asChild size="lg" variant="secondary" className="text-lg px-8">
-            <Link to="/contact">
-              Get Started Today <ArrowRight className="ml-2" size={20} />
-            </Link>
+          <Button 
+            onClick={handleConsultation}
+            size="lg" 
+            variant="secondary" 
+            className="text-lg px-8"
+          >
+            <Calendar className="mr-2" size={20} />
+            Schedule Your Consultation Now
           </Button>
         </div>
       </section>

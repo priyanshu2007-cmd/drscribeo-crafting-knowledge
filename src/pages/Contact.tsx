@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
 import { Phone, Mail, Instagram, Youtube, MapPin, Clock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -10,6 +11,7 @@ import { services } from "@/data/services";
 
 const Contact = () => {
   const { toast } = useToast();
+  const [searchParams] = useSearchParams();
   const [formData, setFormData] = useState({
     fullName: "",
     phone: "",
@@ -19,6 +21,14 @@ const Contact = () => {
     service: "",
     message: "",
   });
+
+  // Pre-fill subject from URL params
+  useEffect(() => {
+    const subjectFromUrl = searchParams.get("subject");
+    if (subjectFromUrl) {
+      setFormData(prev => ({ ...prev, subject: subjectFromUrl }));
+    }
+  }, [searchParams]);
 
   const [errors, setErrors] = useState<Record<string, string>>({});
 

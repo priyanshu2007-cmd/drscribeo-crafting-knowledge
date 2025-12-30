@@ -1,21 +1,28 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { NavLink } from "@/components/NavLink";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Calendar } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const navigate = useNavigate();
 
   const navLinks = [
     { to: "/", label: "Home" },
     { to: "/about", label: "About" },
     { to: "/services", label: "Services" },
+    { to: "/pricing", label: "Pricing" },
     { to: "/blogs", label: "Blogs" },
     { to: "/faq", label: "FAQ" },
     { to: "/reviews", label: "Reviews" },
     { to: "/contact", label: "Contact" },
   ];
+
+  const handleConsultation = () => {
+    setIsMenuOpen(false);
+    navigate("/contact?subject=Consultation%20Request");
+  };
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border bg-card/95 backdrop-blur supports-[backdrop-filter]:bg-card/80 shadow-soft">
@@ -33,12 +40,12 @@ const Header = () => {
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-1">
+          <nav className="hidden lg:flex items-center space-x-1">
             {navLinks.map((link) => (
               <NavLink
                 key={link.to}
                 to={link.to}
-                className="px-4 py-2 text-sm font-medium text-foreground/80 rounded-lg transition-colors hover:bg-muted hover:text-foreground"
+                className="px-3 py-2 text-sm font-medium text-foreground/80 rounded-lg transition-colors hover:bg-muted hover:text-foreground"
                 activeClassName="bg-primary/10 text-primary font-semibold"
               >
                 {link.label}
@@ -47,16 +54,17 @@ const Header = () => {
           </nav>
 
           {/* CTA Button - Desktop */}
-          <div className="hidden md:flex items-center space-x-2">
-            <Button asChild variant="default" className="gradient-primary hover:opacity-90">
-              <Link to="/contact">Join Now</Link>
+          <div className="hidden lg:flex items-center space-x-2">
+            <Button onClick={handleConsultation} variant="default" className="gradient-primary hover:opacity-90">
+              <Calendar className="mr-2 w-4 h-4" />
+              Schedule Consultation
             </Button>
           </div>
 
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="md:hidden p-2 text-foreground hover:bg-muted rounded-lg transition-colors"
+            className="lg:hidden p-2 text-foreground hover:bg-muted rounded-lg transition-colors"
             aria-label="Toggle menu"
           >
             {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -65,7 +73,7 @@ const Header = () => {
 
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <nav className="md:hidden py-4 border-t border-border">
+          <nav className="lg:hidden py-4 border-t border-border">
             <div className="flex flex-col space-y-2">
               {navLinks.map((link) => (
                 <NavLink
@@ -79,10 +87,9 @@ const Header = () => {
                 </NavLink>
               ))}
               <div className="px-4 pt-2">
-                <Button asChild className="w-full gradient-primary hover:opacity-90">
-                  <Link to="/contact" onClick={() => setIsMenuOpen(false)}>
-                    Join Now
-                  </Link>
+                <Button onClick={handleConsultation} className="w-full gradient-primary hover:opacity-90">
+                  <Calendar className="mr-2 w-4 h-4" />
+                  Schedule Consultation
                 </Button>
               </div>
             </div>

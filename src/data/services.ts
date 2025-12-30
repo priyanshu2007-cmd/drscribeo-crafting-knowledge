@@ -1,4 +1,4 @@
-import { BookOpen, FileText, Award, Presentation, ClipboardList, BookMarked, PenTool, Heart, Newspaper } from "lucide-react";
+import { BookOpen, FileText, Award, Presentation, ClipboardList, BookMarked, PenTool, Heart, Newspaper, Edit, GraduationCap } from "lucide-react";
 
 export const services = [
   {
@@ -64,6 +64,20 @@ export const services = [
     icon: Newspaper,
     category: "Content Creation",
   },
+  {
+    id: 10,
+    title: "Thesis Editing and Proofreading",
+    description: "Expert editing focused on grammar, flow, academic tone, and formatting compliance. We polish your work to meet the highest academic standards.",
+    icon: Edit,
+    category: "Editing Services",
+  },
+  {
+    id: 11,
+    title: "Revisions and Defense Preparation",
+    description: "Comprehensive support for addressing supervisor feedback, mock defense questions, and presentation coaching to ensure your success.",
+    icon: GraduationCap,
+    category: "Defense Support",
+  },
 ];
 
 export const serviceCategories = [
@@ -74,5 +88,7 @@ export const serviceCategories = [
   "Writing Services",
   "Content Creation",
   "Academic Materials",
-  "Statistical Analysis"
+  "Statistical Analysis",
+  "Editing Services",
+  "Defense Support"
 ];
